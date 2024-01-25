@@ -10,6 +10,10 @@
   - [Systemとは](#systemとは)
   - [System.outとは](#systemoutとは)
   - [System.out.printlnとは](#systemoutprintlnとは)
+- [importの使い方](#importの使い方)
+  - [同パッケージ内のクラスを複数利用する際の記述方法](#同パッケージ内のクラスを複数利用する際の記述方法)
+  - [java.langパッケージの例外](#javalangパッケージの例外)
+
 
 ## クラス、メソッド、フィールド
 Javaを使ったプログラミングを開始するうえでクラス、メソッド、フィールドがどういったものなのか簡単に学習。
@@ -148,6 +152,45 @@ PrintStreamクラスには引数のデータ型毎にprintlnメソッドが用�
 ### System.out.printlnとは
 前述の結果として、System.out.printlnは標準出力[^7]に対して指定した値を出力するためのメソッドという事になる。
 
+## importの使い方
+Javaではあらかじめ用意されたクラスを自分のプログラムの中で使用するには完全修飾子[^8]を記述して使用することも出来るが、import宣言を行なっておくことでクラス名だけの記述で済む。  
+クラス名だけの事を単純名と呼び、クラスを利用する際はimport宣言と単純名で利用する事が一般的である。
+
+例1：import宣言によるLocalDateクラス[^9]の利用
+```
+import java.time.LocalDate; //import宣言
+
+class JSample9_1 {
+  public static void main (String[] args) {
+    // 単純名でLocalDateクラスのnowメソッドを利用
+    LocalDate ld = LocalDate.now();
+    System.out.println(ld);
+  }
+}
+```
+
+例2：完全修飾子を使用したLocalDateクラスの利用
+```
+class JSample9_2 {
+  public static void main (String[] args) {
+    // 完全修飾子でLocalDateクラスのnowメソッドを利用
+    java.time.LocalDate ld = java.time.LocalDate.now();
+    System.out.println(ld);
+  }
+}
+```
+
+### 同パッケージ内のクラスを複数利用する際の記述方法
+例：java.utilパッケージ内に含まれる全てのクラスのimport宣言
+```
+import java.util.*;
+```
+なお上記の場合、java.utilパッケージ内のクラスは単純名で利用可能だが、下層パッケージであるjava.util.regexパッケージ内のクラスは単純名で利用できないので注意。
+
+### java.langパッケージの例外
+前述だが、StringクラスやSystemクラスなど、java.langパッケージに含まれているクラスはimport宣言の必要がない。  
+java.lang.Stringやjava.lang1.Systemのように完全修飾子を記述する必要もない。
+
 
 [^1]: 「ある役割を持ったモノ」ごとにクラスを分割し、モノとモノとの関係性を定義していく事でシステムを作り上げようとするシステム構成の考え方。
 [^2]: アクセスの範囲を限定するもの。「public」「private」「protected」「修飾子無し」の4パターンがある。
@@ -156,3 +199,6 @@ PrintStreamクラスには引数のデータ型毎にprintlnメソッドが用�
 [^5]: クラスを元に生成されたオブジェクト。クラスを設計書とするとインスタンスはそれを元に作られた実体。オブジェクト指向プログラミング言語にとって重要な要素である。
 [^6]: Javaのクラスをを目的に合わせてグループ化した単位。
 [^7]: プログラムから何かしらを出力するときに使用される出力先の事。例として、コマンドプロンプトからプログラムを実行している場合の標準出力はコマンドプロンプトの画面となる。
+[^8]: 「java.util.regex.Pattern」といった正式なクラス名称の事。パッケージを含めたクラス名の事。
+[^9]: 日付の情報を扱うクラス
+[^10]: 正規表現を扱うクラスが揃うパッケージ
