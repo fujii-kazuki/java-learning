@@ -23,5 +23,8 @@ class JSample5_2 {
     float num;
     // num = 7.8;  //エラー
     num = 7.8F;    //OK
+
+    System.out.println(10 > 7); //true
+    System.out.println(5 == 4); //false
   }
 }
